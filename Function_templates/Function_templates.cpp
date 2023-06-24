@@ -1,4 +1,4 @@
-﻿// DmitrievaOA_СПД211
+// DmitrievaOA_СПД211
 
 #include<iostream>
 using namespace std;
@@ -11,21 +11,20 @@ void FillRand(double arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int arr[ROWS][COLS], const int ROWS, const int COLS, int minRand = 0, int maxRand = 100);
 void FillRand(double arr[ROWS][COLS], const int ROWS, const int COLS, int minRand = 0, int maxRand = 100);
 
-template<typename T> // Т - имя шаблонного типа
-void Print(T arr[], const int n);
-template<typename T>
-void Print(T arr[ROWS][COLS], const int ROWS, const int COLS);
+void Print(int arr[], const int n);
+void Print(double arr[], const int n);
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Print(double arr[ROWS][COLS], const int ROWS, const int COLS);
 
-template<typename T>
-void Sort(T arr[], const int n);
-template<typename T>
-void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(int arr[], const int n);
+void Sort(double arr[], const int n);
+void Sort(int arr[ROWS][COLS], const int ROWS, const int COLS);
+void Sort(double arr[ROWS][COLS], const int ROWS, const int COLS);
 
-template<typename T>
-int Sum(T arr[], const int n);
-template<typename T>
-T Sum(T arr[ROWS][COLS], const int ROWS, const int COLS);
-
+int Sum(int arr[], const int n);
+double Sum(double arr[], const int n);
+int Sum(int arr[ROWS][COLS], const int ROWS, const int COLS);
+double Sum(double arr[ROWS][COLS], const int ROWS, const int COLS);
 
 double Avg(int arr[], const int n);
 double Avg(double arr[], const int n);
@@ -150,14 +149,7 @@ void Print(double arr[], const int n)
 	}
 	cout << endl;
 }
-
-template<typename T>
-void Print(T arr[], const int n)
-{
-}
-
-template<typename T>
-void Print(T arr[ROWS][COLS], const int ROWS, const int COLS)
+void Print(int arr[ROWS][COLS], const int ROWS, const int COLS)
 {
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -180,29 +172,51 @@ void Print(double arr[ROWS][COLS], const int ROWS, const int COLS)
 	}
 }
 
-template<typename T>
-void Sort(T arr[ROWS][COLS], const int ROWS, const int COLS)
+void Sort(int arr[], const int n)
 {
 	// Сортировка массива:
-	for (int i = 0; i < ROWS; i++)	        // Счетчик 'i' выбирает элемент, в который нкжно поместить минимальное значение
+	for (int i = 0; i < n; i++)	// Счетчик 'i' выбирает элемент, в который нкжно поместить минимальное значение
 	{
-		for (int j = i + 1; j < COLS; j++)	// Счетчик 'j' перебирает элементы в поисках минимального значения.
-		{                                   // Пeребирается только правая часть массива относительно выбранного элемента.
+		for (int j = i + 1; j < n; j++)	// Счетчик 'j' перебирает элементы в поисках минимального значения.
+		{                               // Перебирается только правая часть массива относительно выбранного элемента.
 			if (arr[j] < arr[i])
 			{
-				T buffer = arr[i];
-				arr[i][j] = arr[j];
+				int buffer = arr[i];
+				arr[i] = arr[j];
 				arr[j] = buffer;
 			}
-			iterations++;
+		}
+	}
+}
+void Sort(double arr[], const int n)
+{
+	// Сортировка массива:
+	for (int i = 0; i < n; i++)	        // Счетчик 'i' выбирает элемент, в который нкжно поместить минимальное значение
+	{
+		for (int j = i + 1; j < n; j++)	// Счетчик 'j' перебирает элементы в поисках минимального значения.
+		{                               // Перебирается только правая часть массива относительно выбранного элемента.
+			if (arr[j] < arr[i])
+			{
+				double buffer = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buffer;
+			}
 		}
 	}
 }
 
-template<typename T>
-int Sum(T arr[], const int n)
+int Sum(int arr[], const int n)
 {
-	T sum = 0;
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += arr[i];
+	}
+	return sum;
+}
+double Sum(double arr[], const int n)
+{
+	double sum = 0;
 	for (int i = 0; i < n; i++)
 	{
 		sum += arr[i];
